@@ -20,6 +20,7 @@ interface FoodMapProps {
   selectedPin: FoodPin | null;
   selectedIngredient: Ingredient | null;
   onPinClick: (pin: FoodPin) => void;
+  onIngredientClick: (ingredient: Ingredient) => void;
 }
 
 function MapController({
@@ -33,13 +34,11 @@ function MapController({
 
   useEffect(() => {
     if (!selectedPin) {
-      // Home: Europe view
       map.flyTo([50, 10], 5, { duration: 1 });
       return;
     }
 
     if (selectedIngredient) {
-      // Zoom to fit the active ingredient's route
       const bounds = L.latLngBounds(
         [selectedIngredient.originLat, selectedIngredient.originLng],
         [selectedPin.lat, selectedPin.lng]
@@ -48,19 +47,17 @@ function MapController({
       return;
     }
 
-    // Food selected, no ingredient: zoom out to world view to show all routes
     const allPoints: L.LatLng[] = [L.latLng(selectedPin.lat, selectedPin.lng)];
     for (const ing of selectedPin.ingredients) {
       allPoints.push(L.latLng(ing.originLat, ing.originLng));
     }
-    const bounds = L.latLngBounds(allPoints);
-    map.flyToBounds(bounds.pad(0.3), { duration: 1.2 });
+    map.flyToBounds(L.latLngBounds(allPoints).pad(0.3), { duration: 1.2 });
   }, [selectedPin, selectedIngredient, map]);
 
   return null;
 }
 
-export default function FoodMap({ selectedPin, selectedIngredient, onPinClick }: FoodMapProps) {
+export default function FoodMap({ selectedPin, selectedIngredient, onPinClick, onIngredientClick }: FoodMapProps) {
   return (
     <MapContainer
       center={[50, 10]}
@@ -74,25 +71,35 @@ export default function FoodMap({ selectedPin, selectedIngredient, onPinClick }:
       />
       <MapController selectedPin={selectedPin} selectedIngredient={selectedIngredient} />
 
-      {/* Food location pins */}
-      {pins.map((pin) => (
-        <Marker
-          key={pin.id}
-          position={[pin.lat, pin.lng]}
-          eventHandlers={{ click: () => onPinClick(pin) }}
-        />
-      ))}
+      {/* Food location pins — hide others when one is selected */}
+      {pins
+        .filter((pin) => !selectedPin || pin.id === selectedPin.id)
+        .map((pin) => (
+          <Marker
+            key={pin.id}
+            position={[pin.lat, pin.lng]}
+            eventHandlers={{ click: () => onPinClick(pin) }}
+          />
+        ))}
 
-      {/* Ingredient route lines — shown when a food item is selected */}
+      {/* Ingredient route arcs */}
       {selectedPin?.ingredients.map((ing) => {
         const isActive = selectedIngredient?.id === ing.id;
         const points = arcPoints(
           [ing.originLat, ing.originLng],
           [selectedPin.lat, selectedPin.lng]
         );
-        return (
+        return [
+          // Wide invisible hit area for easy clicking
           <Polyline
-            key={ing.id}
+            key={`${ing.id}-hit`}
+            positions={points}
+            pathOptions={{ color: "transparent", weight: 12, opacity: 0 }}
+            eventHandlers={{ click: () => onIngredientClick(ing) }}
+          />,
+          // Visible arc
+          <Polyline
+            key={`${ing.id}-line`}
             positions={points}
             pathOptions={{
               color: isActive ? "#2563eb" : "#9ca3af",
@@ -100,8 +107,9 @@ export default function FoodMap({ selectedPin, selectedIngredient, onPinClick }:
               opacity: isActive ? 0.9 : 0.5,
               dashArray: isActive ? undefined : "6 4",
             }}
-          />
-        );
+            eventHandlers={{ click: () => onIngredientClick(ing) }}
+          />,
+        ];
       })}
     </MapContainer>
   );

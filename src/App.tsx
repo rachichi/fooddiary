@@ -14,8 +14,12 @@ export default function App() {
   }
 
   function handleIngredientClick(ingredient: Ingredient) {
-    // Toggle off if already selected
     setSelectedIngredient((prev) => (prev?.id === ingredient.id ? null : ingredient));
+  }
+
+  function handleClose() {
+    setSelectedPin(null);
+    setSelectedIngredient(null);
   }
 
   return (
@@ -27,6 +31,7 @@ export default function App() {
             selectedPin={selectedPin}
             selectedIngredient={selectedIngredient}
             onPinClick={handlePinClick}
+            onIngredientClick={handleIngredientClick}
           />
         </div>
         <div className="w-72 shrink-0 border-l border-warm-black/20 overflow-y-auto">
@@ -34,6 +39,7 @@ export default function App() {
             selectedPin={selectedPin}
             selectedIngredient={selectedIngredient}
             onIngredientClick={handleIngredientClick}
+            onClose={handleClose}
           />
         </div>
       </div>
