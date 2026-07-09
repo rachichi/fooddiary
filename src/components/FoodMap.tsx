@@ -1,20 +1,112 @@
-import { useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Polyline, useMap } from "react-leaflet";
-import L from "leaflet";
+import { useEffect, useRef, useState } from "react";
+import { setOptions, importLibrary } from "@googlemaps/js-api-loader";
+import { GoogleMapsOverlay } from "@deck.gl/google-maps";
+import { PathLayer, ScatterplotLayer } from "@deck.gl/layers";
 import { pins } from "../data/pins";
 import type { FoodPin, Ingredient } from "../data/pins";
 import { arcPoints } from "../utils/arc";
 
-import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
-import markerIcon from "leaflet/dist/images/marker-icon.png";
-import markerShadow from "leaflet/dist/images/marker-shadow.png";
+setOptions({ key: "AIzaSyBuSrK3nhDKPLFe0bcGWOFPJMQ-giGyl_U", version: "beta" });
 
-delete (L.Icon.Default.prototype as any)._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: markerIcon2x,
-  iconUrl: markerIcon,
-  shadowUrl: markerShadow,
-});
+const countryFlags: Record<string, string> = {
+  Germany: "🇩🇪",
+  Italy: "🇮🇹",
+  Netherlands: "🇳🇱",
+  Spain: "🇪🇸",
+};
+
+type RGBA = [number, number, number, number];
+
+interface PathDatum {
+  path: [number, number][];
+  color: RGBA;
+  width: number;
+  ingredientId: string;
+}
+
+interface DotDatum {
+  position: [number, number];
+  color: RGBA;
+}
+
+function buildLayers(
+  selectedPin: FoodPin | null,
+  selectedIngredient: Ingredient | null,
+  onIngredientClick: (ing: Ingredient) => void
+) {
+  if (!selectedPin) return [];
+
+  const sorted = [...selectedPin.ingredients].sort((a, b) =>
+    selectedIngredient?.id === a.id ? 1 : selectedIngredient?.id === b.id ? -1 : 0
+  );
+
+  const paths: PathDatum[] = [];
+  const dots: DotDatum[] = [];
+
+  for (const ing of sorted) {
+    const isActive = selectedIngredient?.id === ing.id;
+    const color: RGBA = isActive ? [37, 99, 235, 230] : [156, 163, 175, 140];
+
+    if (ing.routes && ing.routes.length > 0) {
+      for (const route of ing.routes) {
+        for (let i = 0; i < route.length - 1; i++) {
+          const from = route[i];
+          const to = route[i + 1];
+          const pts = arcPoints([from.lat, from.lng], [to.lat, to.lng]);
+          paths.push({
+            path: pts.map(([lat, lng]) => [lng, lat]),
+            color,
+            width: isActive ? 3 : 2,
+            ingredientId: ing.id,
+          });
+        }
+        for (const stop of route) {
+          dots.push({ position: [stop.lng, stop.lat], color });
+        }
+      }
+    } else {
+      const pts = arcPoints([ing.originLat, ing.originLng], [selectedPin.lat, selectedPin.lng]);
+      paths.push({
+        path: pts.map(([lat, lng]) => [lng, lat]),
+        color,
+        width: isActive ? 3 : 2,
+        ingredientId: ing.id,
+      });
+      dots.push({ position: [ing.originLng, ing.originLat], color });
+      dots.push({ position: [selectedPin.lng, selectedPin.lat], color });
+    }
+  }
+
+  return [
+    new PathLayer<PathDatum>({
+      id: "routes",
+      data: paths,
+      getPath: (d) => d.path,
+      getColor: (d) => d.color,
+      getWidth: (d) => d.width,
+      widthUnits: "pixels",
+      widthMinPixels: 1,
+      pickable: true,
+      onClick: ({ object }) => {
+        if (!object) return;
+        const ing = selectedPin.ingredients.find((i) => i.id === object.ingredientId);
+        if (ing) onIngredientClick(ing);
+      },
+    }),
+    new ScatterplotLayer<DotDatum>({
+      id: "dots",
+      data: dots,
+      getPosition: (d) => d.position,
+      getRadius: 5,
+      radiusUnits: "pixels",
+      getFillColor: (d) => d.color,
+      getLineColor: [255, 255, 255, 255],
+      lineWidthMinPixels: 1.5,
+      stroked: true,
+      filled: true,
+    }),
+  ];
+}
 
 interface FoodMapProps {
   selectedPin: FoodPin | null;
@@ -23,94 +115,117 @@ interface FoodMapProps {
   onIngredientClick: (ingredient: Ingredient) => void;
 }
 
-function MapController({
+export default function FoodMap({
   selectedPin,
   selectedIngredient,
-}: {
-  selectedPin: FoodPin | null;
-  selectedIngredient: Ingredient | null;
-}) {
-  const map = useMap();
+  onPinClick,
+  onIngredientClick,
+}: FoodMapProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const mapRef = useRef<google.maps.Map | null>(null);
+  const overlayRef = useRef<GoogleMapsOverlay | null>(null);
+  const pinMarkersRef = useRef<google.maps.marker.AdvancedMarkerElement[]>([]);
+  const [mapReady, setMapReady] = useState(false);
 
+  // Initialize map once
   useEffect(() => {
+    if (!containerRef.current) return;
+
+    Promise.all([
+      importLibrary("maps"),
+      importLibrary("marker"),
+    ]).then(([{ Map }]) => {
+      if (!containerRef.current) return;
+
+      const map = new Map(containerRef.current, {
+        center: { lat: 50, lng: 10 },
+        zoom: 5,
+        mapId: "DEMO_MAP_ID",
+        gestureHandling: "greedy",
+      });
+
+      mapRef.current = map;
+
+      const overlay = new GoogleMapsOverlay({ layers: [] });
+      overlay.setMap(map);
+      overlayRef.current = overlay;
+
+      setMapReady(true);
+    });
+
+    return () => {
+      pinMarkersRef.current.forEach((m) => (m.map = null));
+      pinMarkersRef.current = [];
+    };
+  }, []);
+
+  // Update food pin markers
+  useEffect(() => {
+    if (!mapReady || !mapRef.current) return;
+
+    pinMarkersRef.current.forEach((m) => (m.map = null));
+    pinMarkersRef.current = [];
+
+    const visiblePins = pins.filter((pin) => !selectedPin || pin.id === selectedPin.id);
+
+    for (const pin of visiblePins) {
+      const flag = countryFlags[pin.country] ?? "📍";
+      const el = document.createElement("div");
+      el.style.cssText =
+        "width:26px;height:26px;border-radius:50%;background:#efefef;display:flex;align-items:center;" +
+        "justify-content:center;font-size:20px;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.22);" +
+        "line-height:1;cursor:pointer";
+      el.textContent = flag;
+
+      const marker = new google.maps.marker.AdvancedMarkerElement({
+        map: mapRef.current,
+        position: { lat: pin.lat, lng: pin.lng },
+        content: el,
+      });
+
+      marker.addEventListener("gmp-click", () => onPinClick(pin));
+      pinMarkersRef.current.push(marker);
+    }
+  }, [mapReady, selectedPin, onPinClick]);
+
+  // Update route layers
+  useEffect(() => {
+    if (!mapReady || !overlayRef.current) return;
+    overlayRef.current.setProps({
+      layers: buildLayers(selectedPin, selectedIngredient, onIngredientClick),
+    });
+  }, [mapReady, selectedPin, selectedIngredient, onIngredientClick]);
+
+  // Camera transitions
+  useEffect(() => {
+    if (!mapReady || !mapRef.current) return;
+    const map = mapRef.current;
+
     if (!selectedPin) {
-      map.flyTo([50, 10], 5, { duration: 1 });
+      map.panTo({ lat: 50, lng: 10 });
+      map.setZoom(5);
       return;
     }
+
+    const bounds = new google.maps.LatLngBounds();
 
     if (selectedIngredient) {
-      const bounds = L.latLngBounds(
-        [selectedIngredient.originLat, selectedIngredient.originLng],
-        [selectedPin.lat, selectedPin.lng]
+      const stops = selectedIngredient.routes
+        ? selectedIngredient.routes.flat()
+        : [
+            { lat: selectedIngredient.originLat, lng: selectedIngredient.originLng },
+            { lat: selectedPin.lat, lng: selectedPin.lng },
+          ];
+      stops.forEach((s) => bounds.extend({ lat: s.lat, lng: s.lng }));
+    } else {
+      bounds.extend({ lat: selectedPin.lat, lng: selectedPin.lng });
+      selectedPin.ingredients.forEach((ing) =>
+        bounds.extend({ lat: ing.originLat, lng: ing.originLng })
       );
-      map.flyToBounds(bounds.pad(0.3), { duration: 1.2 });
-      return;
     }
 
-    const allPoints: L.LatLng[] = [L.latLng(selectedPin.lat, selectedPin.lng)];
-    for (const ing of selectedPin.ingredients) {
-      allPoints.push(L.latLng(ing.originLat, ing.originLng));
-    }
-    map.flyToBounds(L.latLngBounds(allPoints).pad(0.3), { duration: 1.2 });
-  }, [selectedPin, selectedIngredient, map]);
+    map.fitBounds(bounds, 80);
+  }, [mapReady, selectedPin, selectedIngredient]);
 
-  return null;
-}
-
-export default function FoodMap({ selectedPin, selectedIngredient, onPinClick, onIngredientClick }: FoodMapProps) {
-  return (
-    <MapContainer
-      center={[50, 10]}
-      zoom={5}
-      className="h-full w-full"
-      zoomControl={true}
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <MapController selectedPin={selectedPin} selectedIngredient={selectedIngredient} />
-
-      {/* Food location pins — hide others when one is selected */}
-      {pins
-        .filter((pin) => !selectedPin || pin.id === selectedPin.id)
-        .map((pin) => (
-          <Marker
-            key={pin.id}
-            position={[pin.lat, pin.lng]}
-            eventHandlers={{ click: () => onPinClick(pin) }}
-          />
-        ))}
-
-      {/* Ingredient route arcs */}
-      {selectedPin?.ingredients.map((ing) => {
-        const isActive = selectedIngredient?.id === ing.id;
-        const points = arcPoints(
-          [ing.originLat, ing.originLng],
-          [selectedPin.lat, selectedPin.lng]
-        );
-        return [
-          // Wide invisible hit area for easy clicking
-          <Polyline
-            key={`${ing.id}-hit`}
-            positions={points}
-            pathOptions={{ color: "transparent", weight: 12, opacity: 0 }}
-            eventHandlers={{ click: () => onIngredientClick(ing) }}
-          />,
-          // Visible arc
-          <Polyline
-            key={`${ing.id}-line`}
-            positions={points}
-            pathOptions={{
-              color: isActive ? "#2563eb" : "#9ca3af",
-              weight: isActive ? 3 : 2,
-              opacity: isActive ? 0.9 : 0.5,
-              dashArray: isActive ? undefined : "6 4",
-            }}
-            eventHandlers={{ click: () => onIngredientClick(ing) }}
-          />,
-        ];
-      })}
-    </MapContainer>
-  );
+  return <div ref={containerRef} className="h-full w-full" />;
 }

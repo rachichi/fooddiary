@@ -1,3 +1,14 @@
+import porkSausageImg from "../assets/porksausage.png";
+import ketchupImg from "../assets/ketchup.png";
+import curryPowderImg from "../assets/currypowder.png";
+
+export interface RouteStop {
+  name: string;
+  lat: number;
+  lng: number;
+  emoji?: string;
+}
+
 export interface Ingredient {
   id: string;
   name: string;
@@ -7,6 +18,7 @@ export interface Ingredient {
   originLat: number;
   originLng: number;
   history: string;
+  routes?: RouteStop[][];
 }
 
 export interface FoodPin {
@@ -39,30 +51,58 @@ export const pins: FoodPin[] = [
       {
         id: "pork-sausage",
         name: "Pork Sausage",
+        image: porkSausageImg,
         originCity: "Thuringia",
         originCountry: "Germany",
         originLat: 50.93,
         originLng: 11.03,
+        routes: [
+          [
+            { name: "Thuringia, Germany", lat: 50.93, lng: 11.03 },
+            { name: "Berlin, Germany", lat: 52.52, lng: 13.405 },
+          ],
+          [
+            { name: "Franconia, Germany", lat: 49.45, lng: 11.08 },
+            { name: "Berlin, Germany", lat: 52.52, lng: 13.405 },
+          ],
+        ],
         history:
           "The history of the pork sausage dates back to 1404 CE and is entirely domestic to Germany. Two regions (Thuringia and Franconia) both claim credit for the bratwurst, and the rivalry is still heated today.",
       },
       {
         id: "ketchup",
         name: "Ketchup",
+        image: ketchupImg,
         originCity: "Fujian",
         originCountry: "China",
         originLat: 26.07,
         originLng: 119.3,
+        routes: [
+          [
+            { name: "Southern China", lat: 23.13, lng: 113.26 },
+            { name: "United Kingdom", lat: 51.507, lng: -0.127 },
+            { name: "Americas", lat: 40.71, lng: -74.0 },
+            { name: "Berlin, Germany", lat: 52.52, lng: 13.405 },
+          ],
+        ],
         history:
           "The history of ketchup dates back to 300 BCE and spans across China, Southeast Asia, Britain, and the Americas. It began as a fermented fish paste in southern China, picked up the tomato in the New World, and was standardized as we know it by Heinz in 1876.",
       },
       {
         id: "curry-powder",
         name: "Curry Powder",
+        image: curryPowderImg,
         originCity: "Chennai",
         originCountry: "India",
-        originLat: 13.08,
-        originLng: 80.27,
+        originLat: 20.59,
+        originLng: 78.96,
+        routes: [
+          [
+            { name: "South Asia (India)", lat: 20.59, lng: 78.96 },
+            { name: "East India Company, London, England", lat: 51.514, lng: -0.081 },
+            { name: "Berlin, Germany", lat: 52.52, lng: 13.405 },
+          ],
+        ],
         history:
           "The history of curry powder dates back to 1784 and spans across South Asia and the British Empire. Indian cooks had blended fresh spices for thousands of years, but curry powder as a packaged product was a British colonial invention — a simplified blend for export.",
       },

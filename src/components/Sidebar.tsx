@@ -36,8 +36,8 @@ export default function Sidebar({ selectedPin, selectedIngredient, onIngredientC
         </button>
       </div>
 
-      <div className="flex flex-col gap-4 px-5 pb-6">
-        {/* Photo */}
+      {/* Photo, Review, History, Ingredients label */}
+      <div className="flex flex-col gap-4 px-5 pb-0">
         {selectedPin.image && (
           <img
             src={selectedPin.image}
@@ -47,60 +47,61 @@ export default function Sidebar({ selectedPin, selectedIngredient, onIngredientC
           />
         )}
 
-        {/* Review */}
         <div>
           <p className="text-xs italic font-semibold mb-1">MY REVIEW</p>
           <p className="text-xs leading-relaxed">{selectedPin.review}</p>
         </div>
 
-        {/* History */}
         <div>
           <p className="text-xs italic font-semibold mb-1">HISTORY</p>
           <p className="text-xs leading-relaxed">{selectedPin.history}</p>
         </div>
 
-        {/* Ingredients */}
         <div>
           <p className="text-xs italic font-semibold mb-1">INGREDIENTS</p>
-          <p className="text-xs text-warm-black/70 mb-4">
+          <p className="text-xs text-warm-black/70">
             Click on an ingredient to trace how it made its way here.
           </p>
-          <div className="flex gap-4">
-            {selectedPin.ingredients.map((ing) => {
-              const isActive = selectedIngredient?.id === ing.id;
-              return (
-                <button
-                  key={ing.id}
-                  onClick={() => onIngredientClick(ing)}
-                  className="flex flex-col items-center gap-1.5 cursor-pointer group"
-                >
-                  <div
-                    className={`w-16 h-16 flex items-center justify-center transition-colors ${
-                      isActive ? "bg-warm-black/10" : "bg-transparent group-hover:bg-warm-black/5"
-                    }`}
-                  >
-                    {ing.image ? (
-                      <img src={ing.image} alt={ing.name} className="w-14 h-14 object-contain" />
-                    ) : (
-                      <span className="text-3xl">🍽️</span>
-                    )}
-                  </div>
-                  <span className="text-[10px] text-center leading-tight max-w-[64px]">
-                    {ing.name.toLowerCase()}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
         </div>
       </div>
 
-      {/* Active ingredient history — grey block flush to sidebar edges */}
-      {selectedIngredient && (
-        <div className="bg-warm-black/5 px-5 py-4 mt-auto">
+      {/* Ingredient tabs — full width, flush to sidebar edges */}
+      <div className="flex mt-4">
+        {selectedPin.ingredients.map((ing) => {
+          const isActive = selectedIngredient?.id === ing.id;
+          return (
+            <button
+              key={ing.id}
+              onClick={() => onIngredientClick(ing)}
+              className="flex-1 flex flex-col items-center cursor-pointer group"
+            >
+              <div
+                className={`w-full flex flex-col items-center gap-1.5 py-3 transition-colors ${
+                  isActive ? "bg-warm-black/10" : "bg-transparent group-hover:bg-warm-black/5"
+                }`}
+              >
+                {ing.image ? (
+                  <img src={ing.image} alt={ing.name} className="w-14 h-14 object-contain" />
+                ) : (
+                  <span className="text-3xl">🍽️</span>
+                )}
+                <span className="text-[10px] text-center leading-tight px-1">
+                  {ing.name.toLowerCase()}
+                </span>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Active ingredient description — flush, full width */}
+      {selectedIngredient ? (
+        <div className="bg-warm-black/10 px-5 py-4">
           <p className="text-xs italic font-semibold mb-2 uppercase">{selectedIngredient.name}</p>
           <p className="text-xs leading-relaxed">{selectedIngredient.history}</p>
         </div>
+      ) : (
+        <div className="pb-6" />
       )}
     </div>
   );
