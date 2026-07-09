@@ -81,7 +81,7 @@ export const pins: FoodPin[] = [
           [
             { name: "Southern China", lat: 23.13, lng: 113.26 },
             { name: "United Kingdom", lat: 51.507, lng: -0.127 },
-            { name: "Americas", lat: 40.71, lng: -74.0 },
+            { name: "H.J. Heinz Company, Sharpsburg, Pennsylvania", lat: 40.497, lng: -79.924 },
             { name: "Berlin, Germany", lat: 52.52, lng: 13.405 },
           ],
         ],

@@ -125,6 +125,7 @@ export default function FoodMap({
   const mapRef = useRef<google.maps.Map | null>(null);
   const overlayRef = useRef<GoogleMapsOverlay | null>(null);
   const pinMarkersRef = useRef<google.maps.marker.AdvancedMarkerElement[]>([]);
+  const hitPolylinesRef = useRef<google.maps.Polyline[]>([]);
   const [mapReady, setMapReady] = useState(false);
 
   // Initialize map once
@@ -156,6 +157,8 @@ export default function FoodMap({
     return () => {
       pinMarkersRef.current.forEach((m) => (m.map = null));
       pinMarkersRef.current = [];
+      hitPolylinesRef.current.forEach((p) => p.setMap(null));
+      hitPolylinesRef.current = [];
     };
   }, []);
 
@@ -189,13 +192,49 @@ export default function FoodMap({
     }
   }, [mapReady, selectedPin, onPinClick]);
 
-  // Update route layers
+  // Update route layers (visual)
   useEffect(() => {
     if (!mapReady || !overlayRef.current) return;
     overlayRef.current.setProps({
       layers: buildLayers(selectedPin, selectedIngredient, onIngredientClick),
     });
   }, [mapReady, selectedPin, selectedIngredient, onIngredientClick]);
+
+  // Invisible hit-target polylines for reliable route clicking
+  useEffect(() => {
+    if (!mapReady || !mapRef.current) return;
+
+    hitPolylinesRef.current.forEach((p) => p.setMap(null));
+    hitPolylinesRef.current = [];
+
+    if (!selectedPin) return;
+
+    for (const ing of selectedPin.ingredients) {
+      const segments: [number, number][][] = [];
+
+      if (ing.routes && ing.routes.length > 0) {
+        for (const route of ing.routes) {
+          for (let i = 0; i < route.length - 1; i++) {
+            segments.push(arcPoints([route[i].lat, route[i].lng], [route[i + 1].lat, route[i + 1].lng]));
+          }
+        }
+      } else {
+        segments.push(arcPoints([ing.originLat, ing.originLng], [selectedPin.lat, selectedPin.lng]));
+      }
+
+      for (const pts of segments) {
+        const polyline = new google.maps.Polyline({
+          path: pts.map(([lat, lng]) => ({ lat, lng })),
+          strokeOpacity: 0,
+          strokeWeight: 12,
+          clickable: true,
+          map: mapRef.current,
+        });
+        polyline.addListener("click", () => onIngredientClick(ing));
+        hitPolylinesRef.current.push(polyline);
+      }
+    }
+  }, [mapReady, selectedPin, onIngredientClick]);
 
   // Camera transitions
   useEffect(() => {
