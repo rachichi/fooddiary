@@ -177,13 +177,14 @@ export default function FoodMap({
         "line-height:1;cursor:pointer";
       el.textContent = flag;
 
+      el.addEventListener("click", () => onPinClick(pin));
+
       const marker = new google.maps.marker.AdvancedMarkerElement({
         map: mapRef.current,
         position: { lat: pin.lat, lng: pin.lng },
         content: el,
       });
 
-      marker.addEventListener("gmp-click", () => onPinClick(pin));
       pinMarkersRef.current.push(marker);
     }
   }, [mapReady, selectedPin, onPinClick]);
