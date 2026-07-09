@@ -114,6 +114,15 @@ Add to the `ingredients` array inside a food pin:
 
 ---
 
+## Notes
+
+- **Google Maps API key required** — the map is built on the Google Maps JavaScript API + Deck.gl overlay. A valid API key must be set in `src/components/FoodMap.tsx`. The key requires a Google Cloud billing account to be active.
+- **Billing** — Google provides $200/month in free credits, which covers ~28,000 map loads. A personal portfolio will never exceed this, but a credit card must be on file in Google Cloud Console. Set a $0 budget alert under Billing → Budgets & alerts to get notified of any unexpected charges.
+- **Leaflet fallback** — the `20260708-leaflet` branch contains a fully working version using Leaflet (OpenStreetMap tiles) with no API key or billing required. Merge it into main if you want a zero-cost deployment.
+- **Map ID** — the code currently uses `DEMO_MAP_ID` for the Google Maps map style. This works but you can replace it with a real Map ID from Google Cloud Console if you want to apply a custom map style.
+
+---
+
 ## Development
 
 ```bash
