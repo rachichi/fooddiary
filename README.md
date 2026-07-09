@@ -1,32 +1,125 @@
-# React + TypeScript + Vite
+# Food Diary
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+An interactive map tracking traditional foods from places I've traveled, with ingredient trade route visualizations.
 
-Currently, two official plugins are available:
+## Architecture
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```
+src/
+├── components/
+│   ├── Navbar.tsx          # Top navigation bar with portfolio links
+│   ├── Sidebar.tsx         # Right panel — food pin details, ingredient tabs, history
+│   └── FoodMap.tsx         # Google Maps + Deck.gl map, route arcs, markers
+├── data/
+│   └── pins.ts             # *** ALL food and route data lives here (see below) ***
+├── assets/                 # Ingredient and food images
+│   ├── currypowder.png
+│   ├── ketchup.png
+│   └── porksausage.png
+├── utils/
+│   └── arc.ts              # Great-circle arc interpolation for curved routes
+├── App.tsx                 # Root layout, state management (selected pin/ingredient)
+├── main.tsx                # App entry point
+└── index.css               # Tailwind base styles
+```
 
-## React Compiler
+### How it works
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. **`pins.ts`** defines every food location and its ingredients as typed data — no logic, just content.
+2. **`App.tsx`** holds two pieces of state: which food pin is selected, and which ingredient is active.
+3. **`FoodMap.tsx`** renders the Google Maps base with:
+   - `AdvancedMarkerElement` for food destination pins (flag emoji in a circle)
+   - `PathLayer` (Deck.gl) for great-circle arc routes
+   - `ScatterplotLayer` (Deck.gl) for route stop dots
+   - Invisible `google.maps.Polyline` objects as click hit targets over each route
+4. **`Sidebar.tsx`** reads from the selected pin and renders the food details, ingredient tabs, and ingredient history panel.
 
-## Expanding the Oxlint configuration
+### Branches
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+| Branch | Description |
+|---|---|
+| `main` | Current version — Google Maps + Deck.gl |
+| `20260708-leaflet` | Archived Leaflet version (no API key required) |
+| `3d-migration` | Working branch for the Google Maps migration |
 
-```json
+---
+
+## Adding new content
+
+> When you have the final list of foods, locations, and ingredients, **`src/data/pins.ts` is the only file you need to edit.**
+
+### Adding a food pin
+
+Add an entry to the `pins` array in `src/data/pins.ts`:
+
+```ts
 {
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
+  id: "unique-id",           // kebab-case, used internally
+  name: "Dish Name",
+  city: "City",
+  country: "Country",        // must match a key in countryFlags in FoodMap.tsx to get a flag marker
+  lat: 00.000,               // decimal latitude of the city
+  lng: 00.000,               // decimal longitude
+  image: myFoodImage,        // optional — import the image at the top of pins.ts
+  review: "Your review...",
+  history: "History of the dish...",
+  ingredients: [ ... ],
 }
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### Adding a country flag marker
+
+If the food is in a country not yet in the `countryFlags` map, add it in `src/components/FoodMap.tsx`:
+
+```ts
+const countryFlags: Record<string, string> = {
+  Germany: "🇩🇪",
+  Italy: "🇮🇹",
+  // add your country here
+};
+```
+
+### Adding an ingredient
+
+Add to the `ingredients` array inside a food pin:
+
+```ts
+{
+  id: "unique-ingredient-id",
+  name: "Ingredient Name",
+  image: myIngredientImage,   // optional — import PNG from src/assets/
+  originCity: "City",
+  originCountry: "Country",
+  originLat: 00.000,
+  originLng: 00.000,
+  history: "History of this ingredient...",
+  routes: [                   // optional — omit for a simple 2-point arc
+    [
+      { name: "Origin City, Country", lat: 00.000, lng: 00.000 },
+      { name: "Stop 2, Country",      lat: 00.000, lng: 00.000 },
+      { name: "Destination City",     lat: 00.000, lng: 00.000 },
+    ],
+  ],
+}
+```
+
+- If `routes` is omitted, a single arc is drawn from `originLat/originLng` to the food pin location.
+- `routes` is an array of arrays — use multiple inner arrays to show branching/alternative origin routes (e.g. pork sausage from both Thuringia and Franconia).
+
+### Adding ingredient images
+
+1. Drop the PNG into `src/assets/`
+2. Import it at the top of `pins.ts`: `import myImg from "../assets/myimage.png";`
+3. Set `image: myImg` on the ingredient
+
+---
+
+## Development
+
+```bash
+npm install
+npm run dev      # http://localhost:5173
+npm run build    # production build → dist/
+```
+
+Deployed on Netlify — pushes to `main` auto-deploy.
