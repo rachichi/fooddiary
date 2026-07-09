@@ -6,7 +6,7 @@ import { pins } from "../data/pins";
 import type { FoodPin, Ingredient } from "../data/pins";
 import { arcPoints } from "../utils/arc";
 
-setOptions({ key: "AIzaSyBuSrK3nhDKPLFe0bcGWOFPJMQ-giGyl_U", version: "beta" });
+setOptions({ key: "AIzaSyBuSrK3nhDKPLFe0bcGWOFPJMQ-giGyl_U", v: "beta" });
 
 const countryFlags: Record<string, string> = {
   Germany: "🇩🇪",
