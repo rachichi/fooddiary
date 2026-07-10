@@ -39,6 +39,9 @@ export default function App() {
   return (
     <div className="flex flex-col h-full text-warm-black" style={{ fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif" }}>
       <Navbar />
+      <div className="hidden max-sm:portrait:block px-4 py-2 border-b border-warm-black/20 text-[10px] tracking-widest font-bold uppercase text-center bg-warm-black text-white">
+        We've detected you may be on mobile — rotate your phone to landscape for a better experience.
+      </div>
       <div className="flex flex-1 overflow-hidden">
         <div className="flex-1 relative">
           {mode === "2d" ? <FoodMap2D {...mapProps} /> : <FoodMap3D {...mapProps} />}
