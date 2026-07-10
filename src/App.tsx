@@ -11,7 +11,7 @@ export default function App() {
   const [selectedPin, setSelectedPin] = useState<FoodPin | null>(null);
   const [selectedIngredient, setSelectedIngredient] = useState<Ingredient | null>(null);
   const [hoveredIngredient, setHoveredIngredient] = useState<Ingredient | null>(null);
-  const [mode, setMode] = useState<MapMode>("3d");
+  const [mode, setMode] = useState<MapMode>("2d");
 
   function handlePinClick(pin: FoodPin) {
     setSelectedPin(pin);
