@@ -3,11 +3,13 @@ import type { FoodPin, Ingredient } from "../data/pins";
 interface SidebarProps {
   selectedPin: FoodPin | null;
   selectedIngredient: Ingredient | null;
+  hoveredIngredient: Ingredient | null;
   onIngredientClick: (ingredient: Ingredient) => void;
+  onIngredientHover: (ingredient: Ingredient | null) => void;
   onClose: () => void;
 }
 
-export default function Sidebar({ selectedPin, selectedIngredient, onIngredientClick, onClose }: SidebarProps) {
+export default function Sidebar({ selectedPin, selectedIngredient, hoveredIngredient, onIngredientClick, onIngredientHover, onClose }: SidebarProps) {
   if (!selectedPin) {
     return (
       <div className="flex flex-col gap-4 p-6 text-sm leading-relaxed text-warm-black">
@@ -85,15 +87,18 @@ export default function Sidebar({ selectedPin, selectedIngredient, onIngredientC
       <div className="flex mt-4">
         {selectedPin.ingredients.map((ing) => {
           const isActive = selectedIngredient?.id === ing.id;
+          const isHovered = hoveredIngredient?.id === ing.id;
           return (
             <button
               key={ing.id}
               onClick={() => onIngredientClick(ing)}
-              className="flex-1 flex flex-col items-center cursor-pointer group"
+              onMouseEnter={() => onIngredientHover(ing)}
+              onMouseLeave={() => onIngredientHover(null)}
+              className="flex-1 flex flex-col items-center cursor-pointer"
             >
               <div
                 className={`w-full flex flex-col items-center gap-1.5 py-3 transition-colors ${
-                  isActive ? "bg-warm-black/10" : "bg-transparent group-hover:bg-warm-black/5"
+                  isActive ? "bg-warm-black/10" : isHovered ? "bg-warm-black/5" : "bg-transparent"
                 }`}
               >
                 {ing.image ? (
