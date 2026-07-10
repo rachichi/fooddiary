@@ -79,6 +79,25 @@ const countryFlags: Record<string, string> = {
 };
 ```
 
+### Adding a video
+
+Each food pin has an optional `videoId` field. When set, the sidebar shows a YouTube embed that autoplays, mutes, and loops. When empty, a grey placeholder box is shown.
+
+1. Upload your video to YouTube (set visibility to **Unlisted** so it doesn't appear on your channel publicly)
+2. Copy the video ID from the URL — e.g. for `youtube.com/watch?v=dQw4w9WgXcQ` the ID is `dQw4w9WgXcQ`
+3. Add it to the pin in `pins.ts`:
+
+```ts
+{
+  id: "currywurst",
+  name: "Currywurst",
+  videoId: "dQw4w9WgXcQ",   // YouTube video ID
+  ...
+}
+```
+
+> **Why YouTube and not direct upload?** 10–15 second video files (even compressed) add significant binary weight to the git repo and Netlify deploy. YouTube is free, handles transcoding across devices, and unlisted videos are private enough for a portfolio.
+
 ### Adding an ingredient
 
 Add to the `ingredients` array inside a food pin:

@@ -38,6 +38,22 @@ export default function Sidebar({ selectedPin, selectedIngredient, onIngredientC
 
       {/* Photo, Review, History, Ingredients label */}
       <div className="flex flex-col gap-4 px-5 pb-0">
+        {/* Video embed or placeholder */}
+        {selectedPin.videoId ? (
+          <div className="w-full aspect-video">
+            <iframe
+              src={`https://www.youtube.com/embed/${selectedPin.videoId}?autoplay=1&mute=1&loop=1&playlist=${selectedPin.videoId}&controls=0&modestbranding=1&rel=0`}
+              className="w-full h-full"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+            />
+          </div>
+        ) : (
+          <div className="w-full aspect-video bg-warm-black/10 flex items-center justify-center">
+            <span className="text-xs text-warm-black/30 uppercase tracking-widest">Video</span>
+          </div>
+        )}
+
         {selectedPin.image && (
           <img
             src={selectedPin.image}

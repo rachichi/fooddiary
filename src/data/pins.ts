@@ -29,7 +29,7 @@ export interface FoodPin {
   lat: number;
   lng: number;
   image?: string;
-  videoUrl?: string;
+  videoId?: string;
   review: string;
   history: string;
   ingredients: Ingredient[];
