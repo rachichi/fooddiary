@@ -5,24 +5,32 @@ An interactive map tracking traditional foods from places I've traveled, with in
 ## Architecture
 
 ```
-src/
-├── components/
-│   ├── Navbar.tsx          # Top navigation bar with portfolio links
-│   ├── Sidebar.tsx         # Right panel — food details, ingredient tabs, hover state
-│   ├── FoodMap2D.tsx       # Google Maps + Deck.gl overlay (flat map view)
-│   ├── FoodMap3D.tsx       # Deck.gl GlobeView (3D globe view)
-│   └── FoodMap.tsx         # Thin re-export of FoodMap3D (backward compat)
-├── data/
-│   └── pins.ts             # *** ALL food and route data lives here (see below) ***
-├── assets/                 # Ingredient and food images
-│   ├── currypowder.png
-│   ├── ketchup.png
-│   └── porksausage.png
-├── utils/
-│   └── arc.ts              # Great-circle arc interpolation for curved routes
-├── App.tsx                 # Root layout, state management
-├── main.tsx                # App entry point
-└── index.css               # Tailwind base styles
+fooddiary/
+├── src/
+│   ├── components/
+│   │   ├── Navbar.tsx          # Top navigation bar with portfolio links
+│   │   ├── Sidebar.tsx         # Right panel — food details, ingredient tabs, hover state
+│   │   ├── FoodMap2D.tsx       # Google Maps + Deck.gl overlay (flat map view)
+│   │   ├── FoodMap3D.tsx       # Deck.gl GlobeView (3D globe view)
+│   │   └── FoodMap.tsx         # Thin re-export of FoodMap3D (backward compat)
+│   ├── data/
+│   │   └── pins.ts             # *** ALL food and route data lives here (see below) ***
+│   ├── assets/                 # Ingredient and food images
+│   │   ├── currypowder.png
+│   │   ├── ketchup.png
+│   │   └── porksausage.png
+│   ├── utils/
+│   │   └── arc.ts              # Great-circle arc interpolation for curved routes
+│   ├── App.tsx                 # Root layout, state management
+│   ├── main.tsx                # App entry point
+│   └── index.css               # Tailwind base styles
+├── public/
+│   └── favicon.png
+├── index.html
+├── package.json
+├── vite.config.ts
+├── tailwind.config.js
+└── netlify.toml                # Netlify build config
 ```
 
 ### How it works
