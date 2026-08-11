@@ -116,6 +116,7 @@ export const pins: FoodPin[] = [
     country: "Germany",
     lat: 48.137,
     lng: 11.576,
+    videoId: "W4yheyqRqs8",
     review:
       "Ordered this from a jolly lady in the Viktualienmarkt at the Wurstimbiss Teltschik stand. Sausage was good, pretzel was meh. Wish I had a bit of saukraut and potato cucumber salad on the side but made do with two massive servings of sweet mustard. Apparently you're not supposed to eat the skin on these sausages, and zuzeln (suck) it out but shoot me for loving a little bit of bite. My favorite sausages are the chili spiced rote bratwurst and big ol' cheese filled käsekrainer.",
     history:
@@ -355,6 +356,7 @@ export const pins: FoodPin[] = [
     country: "Germany",
     lat: 48.1345,
     lng: 11.578,
+    videoId: "Jl60f-JIjp0",
     review:
       "Purchased at Café Fräulein nearby the Viktualienmarkt. Germans love their rhubarb. This one was baked into bread pudding and sat in a pool of vanilla custard. I still don't really get the draw of rhubarb, though I never was a soggy fruit girl, and never understood an ingredient that needs to be paired with loads of sugar to be edible. The cashier complimented my dress twice even though I wore it inside out (once in german).",
     history:
@@ -399,6 +401,7 @@ export const pins: FoodPin[] = [
     country: "Germany",
     lat: 47.7078,
     lng: 11.7562,
+    videoId: "sQ9fSIKYK3c",
     review:
       "Ordered at the Bräustüberl Tegernsee. This was incredible. A simply pork cutlet perfectly breaded, fried, salted and lemoned, though I wish I asked for another lemon slice and some mustard packets. Unfortunately, I was too busy eating. Paired with a scrumptilious cucumber potato salad.",
     history:
@@ -468,6 +471,7 @@ export const pins: FoodPin[] = [
     country: "Italy",
     lat: 44.493,
     lng: 11.3423,
+    videoId: "kCyf1pUY0ec",
     review:
       "Purchased at Pan 8, through a friend's recommendation. I've since realized that I am not a big fan of Italian sandwich bread or grilled, thick cut mortadella but the fig jam and crispy onions and burrata were good. I will always prefer a wet, saucy cheesy sandwich.",
     history:
@@ -557,6 +561,7 @@ export const pins: FoodPin[] = [
     country: "Italy",
     lat: 44.4971,
     lng: 11.3475,
+    videoId: "FpTbPQEw4aw",
     review:
       "This was my second meal at Osteria dell'Orsa. You can always trust Italians to cook their pasta al dente. These tortellini had the most incredible bounce, filled with meat, in a broth of soup. Dumped a pile of Parmesan onto every spoonful and it was deeelightful. Me and Fern finished this meal is no time.",
     history:
@@ -646,6 +651,7 @@ export const pins: FoodPin[] = [
     country: "Spain",
     lat: 41.3812,
     lng: 2.1811,
+    videoId: "H2XNG7zD73Y",
     review:
       "Ordered at Bo de B. Consumed these patatas bravas alongside some 5 euro loaded Mediterranean bocadillos. These potatoes were crisped by a pan stove, rather than a deep fryer and doused with a few incredible sauces. Still prefer a curly fry as my method of fried potato consumption but with the sauces this comes in a close 2nd.",
     history:
@@ -735,6 +741,7 @@ export const pins: FoodPin[] = [
     country: "Portugal",
     lat: 38.7788,
     lng: -9.132,
+    videoId: "nTODesTqCKY",
     review:
       "Purchased a few minutes before boarding. Obviously I've had better, in the heart of Portugal, but I was craving a sweet treat on my layover in Lisboa. The cinnamon blanket covered up the staleness and over-sweetness and it wasn't half bad. I do prefer a shortcrust casing, though (Asian egg tarts FTW).",
     history:
