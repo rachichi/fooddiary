@@ -13,6 +13,7 @@ const countryFlags: Record<string, string> = {
   Italy: "🇮🇹",
   Netherlands: "🇳🇱",
   Spain: "🇪🇸",
+  Portugal: "🇵🇹",
 };
 
 type RGBA = [number, number, number, number];

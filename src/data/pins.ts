@@ -518,7 +518,7 @@ export const pins: FoodPin[] = [
     lng: 11.254,
     videoId: "DcO3bN2Jzi4",
     review:
-      "Purchased from a street vendor called Chiosco del Lampredotto. This is a Florence special. Lampredotto is made from the cows fourth stomach while tripe is made from the first three chambers (the more you know!). I had the sandwich after visiting the Uffitzi museum. They gut out the bread to fit more meat in it. Took one bite and decided I needed straight lampredotto for dinner. I love the texture, the juiciness, and the green sauce they put on top of it but you can tell this was a grease monster and my stomach was struggling.",
+      "Purchased from a street vendor called Chiosco del Lampredotto. This is a Florence special. Lampredotto is made from the cows fourth stomach while tripe is made from the first three chambers (the more you know!). I had the sandwich after visiting the Uffitzi museum. They gut out the unsalted bread to fit more meat in it. Took one bite and decided I needed straight lampredotto for dinner. I love the texture, the juiciness, and the green sauce they put on top of it but you can tell this was a grease monster and my stomach was struggling.",
     history:
       "Lampredotto is a Florentine street-food dish dating to at least the medieval period, when nose-to-tail cooking made use of the cow's fourth stomach (abomasum), historically sold by street vendors to the city's working class.",
     ingredients: [
@@ -541,16 +541,6 @@ export const pins: FoodPin[] = [
         originLng: 11.0,
         history:
           "Tuscan salsa verde, made from parsley, capers, and garlic, has long accompanied boiled and offal meats in regional cuisine.",
-      },
-      {
-        id: "panino-roll",
-        name: "Bread Roll",
-        originCity: "Tuscany",
-        originCountry: "Italy",
-        originLat: 43.5,
-        originLng: 11.0,
-        history:
-          "Tuscan bread, traditionally unsalted, forms the base of the lampredotto panino, hollowed out to hold more filling.",
       },
     ],
   },
@@ -576,16 +566,6 @@ export const pins: FoodPin[] = [
         originLng: 11.34,
         history:
           "Stuffed ring-shaped pasta developed in Emilia-Romagna, with the earliest documented recipes dating to the Renaissance period.",
-      },
-      {
-        id: "meat-broth",
-        name: "Meat Broth",
-        originCity: "Emilia-Romagna",
-        originCountry: "Italy",
-        originLat: 44.6,
-        originLng: 10.9,
-        history:
-          "Slow-simmered capon or beef broth has long been a base for regional Emilian soups, especially served at winter and holiday meals.",
       },
       {
         id: "parmesan",
@@ -621,16 +601,6 @@ export const pins: FoodPin[] = [
         originLng: 1.5,
         history:
           "Egg-and-milk custard desserts have roots across medieval Europe, with Catalonia developing its own citrus-and-cinnamon-spiced version by at least the 14th century.",
-      },
-      {
-        id: "citrus-zest",
-        name: "Lemon & Orange Zest",
-        originCity: "Valencia",
-        originCountry: "Spain",
-        originLat: 39.47,
-        originLng: -0.38,
-        history:
-          "Citrus cultivation was introduced to Spain by Arab traders and cultivated widely by the medieval period.",
       },
       {
         id: "cinnamon-crema",
