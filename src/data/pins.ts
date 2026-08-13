@@ -1,9 +1,17 @@
 import porkSausageImg from "../assets/porksausage.png";
 import ketchupImg from "../assets/ketchup.png";
 import curryPowderImg from "../assets/currypowder.png";
-import sausageImg from "../assets/sausage.png";
+import donerImg from "../assets/doner.png";
 import flatbreadImg from "../assets/flatbread.png";
 import garlicAioliImg from "../assets/garlicaoili.png";
+import yogurtSauceImg from "../assets/yogurtsauce.png";
+import cremeFraicheImg from "../assets/cremefraiche.png";
+import baconImg from "../assets/bacon.png";
+import quarkImg from "../assets/quark.png";
+import creamCheeseImg from "../assets/creamcheese.png";
+import porkBellyImg from "../assets/porkbelly.png";
+import pretzelImg from "../assets/pretzel.png";
+import sauerkrautImg from "../assets/saurkraut.png";
 import rhubarbImg from "../assets/rhubarb.png";
 import custardImg from "../assets/custard.png";
 import breadPuddingImg from "../assets/breadpudding.png";
@@ -29,19 +37,18 @@ import puffPastryImg from "../assets/puffpastry.png";
 /**
  * IMAGE COVERAGE (last updated: Aug 2026)
  *
- * 30 / 43 ingredients have images.
+ * 39 / 43 ingredients have images.
  *
- * Ingredients still missing images (13):
+ * Ingredients still missing images (4):
  *   Weißwurst — Veal, Parsley, Lemon Zest
- *   Flammkuchen — Thin Bread Dough, Crème Fraîche, Smoked Bacon
- *   Käsekuchen — Quark, Shortcrust Pastry
- *   Möhrenkuchen — Cream Cheese
- *   Krustenbraten-Semmel — Pork Belly, Bread Roll (Semmel), Sauerkraut
  *   Schnitzel — Breadcrumbs
  *
- * Asset PNGs with no matching ingredient (2):
+ * Asset PNGs with no matching ingredient (5):
  *   strawberry.png — strawberries in the Kaiserschmarrn review, not an ingredient
  *   potatocucumber.png — side salad in the Schnitzel review, not an ingredient
+ *   mustard.png — mentioned in reviews, not an ingredient
+ *   carrotcake.png — Möhrenkuchen dish photo; only Cream Cheese is listed as an ingredient
+ *   sausage.png — replaced by doner.png for Spit-Roasted Meat
  */
 
 export interface RouteStop {
@@ -212,7 +219,7 @@ export const pins: FoodPin[] = [
       {
         id: "spit-roasted-meat",
         name: "Spit-Roasted Meat",
-        image: sausageImg,
+        image: donerImg,
         originCity: "Bursa",
         originCountry: "Turkey",
         originLat: 40.18,
@@ -234,7 +241,7 @@ export const pins: FoodPin[] = [
       {
         id: "garlic-yogurt-sauce",
         name: "Garlic Yogurt Sauce",
-        image: garlicAioliImg,
+        image: yogurtSauceImg,
         originCity: "Central Asia",
         originCountry: "Turkey",
         originLat: 38.96,
@@ -259,7 +266,8 @@ export const pins: FoodPin[] = [
     ingredients: [
       {
         id: "thin-dough",
-        name: "Thin Bread Dough", // missing image
+        name: "Thin Bread Dough",
+        image: flatbreadImg,
         originCity: "Strasbourg",
         originCountry: "France",
         originLat: 48.58,
@@ -269,7 +277,8 @@ export const pins: FoodPin[] = [
       },
       {
         id: "creme-fraiche",
-        name: "Crème Fraîche", // missing image
+        name: "Crème Fraîche",
+        image: cremeFraicheImg,
         originCity: "Normandy",
         originCountry: "France",
         originLat: 49.18,
@@ -279,7 +288,8 @@ export const pins: FoodPin[] = [
       },
       {
         id: "smoked-bacon",
-        name: "Smoked Bacon", // missing image
+        name: "Smoked Bacon",
+        image: baconImg,
         originCity: "Black Forest",
         originCountry: "Germany",
         originLat: 48.0,
@@ -304,7 +314,8 @@ export const pins: FoodPin[] = [
     ingredients: [
       {
         id: "quark",
-        name: "Quark", // missing image
+        name: "Quark",
+        image: quarkImg,
         originCity: "Central Europe",
         originCountry: "Germany",
         originLat: 51.0,
@@ -314,7 +325,8 @@ export const pins: FoodPin[] = [
       },
       {
         id: "shortcrust-pastry",
-        name: "Shortcrust Pastry", // missing image
+        name: "Shortcrust Pastry",
+        image: puffPastryImg,
         originCity: "Central Europe",
         originCountry: "Germany",
         originLat: 50.0,
@@ -339,7 +351,8 @@ export const pins: FoodPin[] = [
     ingredients: [
       {
         id: "cream-cheese-frosting",
-        name: "Cream Cheese", // missing image
+        name: "Cream Cheese",
+        image: creamCheeseImg,
         originCity: "New York",
         originCountry: "United States",
         originLat: 40.71,
@@ -364,7 +377,8 @@ export const pins: FoodPin[] = [
     ingredients: [
       {
         id: "pork-belly",
-        name: "Pork Belly", // missing image
+        name: "Pork Belly",
+        image: porkBellyImg,
         originCity: "Bavaria",
         originCountry: "Germany",
         originLat: 48.7,
@@ -374,7 +388,8 @@ export const pins: FoodPin[] = [
       },
       {
         id: "bread-roll-semmel",
-        name: "Bread Roll (Semmel)", // missing image
+        name: "Bread Roll (Semmel)",
+        image: pretzelImg,
         originCity: "Vienna",
         originCountry: "Austria",
         originLat: 48.21,
@@ -384,7 +399,8 @@ export const pins: FoodPin[] = [
       },
       {
         id: "sauerkraut",
-        name: "Sauerkraut", // missing image
+        name: "Sauerkraut",
+        image: sauerkrautImg,
         originCity: "Northern China",
         originCountry: "China",
         originLat: 39.9,
