@@ -1,6 +1,48 @@
 import porkSausageImg from "../assets/porksausage.png";
 import ketchupImg from "../assets/ketchup.png";
 import curryPowderImg from "../assets/currypowder.png";
+import sausageImg from "../assets/sausage.png";
+import flatbreadImg from "../assets/flatbread.png";
+import garlicAioliImg from "../assets/garlicaoili.png";
+import rhubarbImg from "../assets/rhubarb.png";
+import custardImg from "../assets/custard.png";
+import breadPuddingImg from "../assets/breadpudding.png";
+import schnitzelImg from "../assets/schnitzel.png";
+import batterImg from "../assets/batter.png";
+import appleSauceImg from "../assets/applesauce.png";
+import mortadellaImg from "../assets/mortadella.png";
+import figImg from "../assets/fig.png";
+import burrataImg from "../assets/burratta.png";
+import lampredettoImg from "../assets/lampradetto.png";
+import salsaVerdeImg from "../assets/salsaverde.png";
+import tortelliniImg from "../assets/tortellini.png";
+import parmesanImg from "../assets/parmasean.png";
+import torchedCustardImg from "../assets/torched.png";
+import cinnamonImg from "../assets/cinnamon.png";
+import patatasImg from "../assets/patatas.png";
+import spicySauceImg from "../assets/spicysauce.png";
+import tomatoImg from "../assets/tomato.png";
+import oliveOilImg from "../assets/oliveoil.png";
+import spanishTortillaImg from "../assets/spanishtortilla.png";
+import puffPastryImg from "../assets/puffpastry.png";
+
+/**
+ * IMAGE COVERAGE (last updated: Aug 2026)
+ *
+ * 30 / 43 ingredients have images.
+ *
+ * Ingredients still missing images (13):
+ *   Weißwurst — Veal, Parsley, Lemon Zest
+ *   Flammkuchen — Thin Bread Dough, Crème Fraîche, Smoked Bacon
+ *   Käsekuchen — Quark, Shortcrust Pastry
+ *   Möhrenkuchen — Cream Cheese
+ *   Krustenbraten-Semmel — Pork Belly, Bread Roll (Semmel), Sauerkraut
+ *   Schnitzel — Breadcrumbs
+ *
+ * Asset PNGs with no matching ingredient (2):
+ *   strawberry.png — strawberries in the Kaiserschmarrn review, not an ingredient
+ *   potatocucumber.png — side salad in the Schnitzel review, not an ingredient
+ */
 
 export interface RouteStop {
   name: string;
@@ -124,7 +166,7 @@ export const pins: FoodPin[] = [
     ingredients: [
       {
         id: "veal",
-        name: "Veal",
+        name: "Veal", // missing image
         originCity: "Bavaria",
         originCountry: "Germany",
         originLat: 48.7,
@@ -134,7 +176,7 @@ export const pins: FoodPin[] = [
       },
       {
         id: "parsley",
-        name: "Parsley",
+        name: "Parsley", // missing image
         originCity: "Sardinia",
         originCountry: "Italy",
         originLat: 39.2,
@@ -144,7 +186,7 @@ export const pins: FoodPin[] = [
       },
       {
         id: "lemon",
-        name: "Lemon Zest",
+        name: "Lemon Zest", // missing image
         originCity: "Assam",
         originCountry: "India",
         originLat: 26.2,
@@ -170,6 +212,7 @@ export const pins: FoodPin[] = [
       {
         id: "spit-roasted-meat",
         name: "Spit-Roasted Meat",
+        image: sausageImg,
         originCity: "Bursa",
         originCountry: "Turkey",
         originLat: 40.18,
@@ -180,6 +223,7 @@ export const pins: FoodPin[] = [
       {
         id: "flatbread-pide",
         name: "Flatbread",
+        image: flatbreadImg,
         originCity: "Anatolia",
         originCountry: "Turkey",
         originLat: 39.0,
@@ -190,6 +234,7 @@ export const pins: FoodPin[] = [
       {
         id: "garlic-yogurt-sauce",
         name: "Garlic Yogurt Sauce",
+        image: garlicAioliImg,
         originCity: "Central Asia",
         originCountry: "Turkey",
         originLat: 38.96,
@@ -214,7 +259,7 @@ export const pins: FoodPin[] = [
     ingredients: [
       {
         id: "thin-dough",
-        name: "Thin Bread Dough",
+        name: "Thin Bread Dough", // missing image
         originCity: "Strasbourg",
         originCountry: "France",
         originLat: 48.58,
@@ -224,7 +269,7 @@ export const pins: FoodPin[] = [
       },
       {
         id: "creme-fraiche",
-        name: "Crème Fraîche",
+        name: "Crème Fraîche", // missing image
         originCity: "Normandy",
         originCountry: "France",
         originLat: 49.18,
@@ -234,7 +279,7 @@ export const pins: FoodPin[] = [
       },
       {
         id: "smoked-bacon",
-        name: "Smoked Bacon",
+        name: "Smoked Bacon", // missing image
         originCity: "Black Forest",
         originCountry: "Germany",
         originLat: 48.0,
@@ -259,7 +304,7 @@ export const pins: FoodPin[] = [
     ingredients: [
       {
         id: "quark",
-        name: "Quark",
+        name: "Quark", // missing image
         originCity: "Central Europe",
         originCountry: "Germany",
         originLat: 51.0,
@@ -269,7 +314,7 @@ export const pins: FoodPin[] = [
       },
       {
         id: "shortcrust-pastry",
-        name: "Shortcrust Pastry",
+        name: "Shortcrust Pastry", // missing image
         originCity: "Central Europe",
         originCountry: "Germany",
         originLat: 50.0,
@@ -294,7 +339,7 @@ export const pins: FoodPin[] = [
     ingredients: [
       {
         id: "cream-cheese-frosting",
-        name: "Cream Cheese",
+        name: "Cream Cheese", // missing image
         originCity: "New York",
         originCountry: "United States",
         originLat: 40.71,
@@ -319,7 +364,7 @@ export const pins: FoodPin[] = [
     ingredients: [
       {
         id: "pork-belly",
-        name: "Pork Belly",
+        name: "Pork Belly", // missing image
         originCity: "Bavaria",
         originCountry: "Germany",
         originLat: 48.7,
@@ -329,7 +374,7 @@ export const pins: FoodPin[] = [
       },
       {
         id: "bread-roll-semmel",
-        name: "Bread Roll (Semmel)",
+        name: "Bread Roll (Semmel)", // missing image
         originCity: "Vienna",
         originCountry: "Austria",
         originLat: 48.21,
@@ -339,7 +384,7 @@ export const pins: FoodPin[] = [
       },
       {
         id: "sauerkraut",
-        name: "Sauerkraut",
+        name: "Sauerkraut", // missing image
         originCity: "Northern China",
         originCountry: "China",
         originLat: 39.9,
@@ -365,6 +410,7 @@ export const pins: FoodPin[] = [
       {
         id: "rhubarb-stalk",
         name: "Rhubarb",
+        image: rhubarbImg,
         originCity: "Western China",
         originCountry: "China",
         originLat: 35.0,
@@ -375,6 +421,7 @@ export const pins: FoodPin[] = [
       {
         id: "vanilla-custard",
         name: "Vanilla",
+        image: custardImg,
         originCity: "Papantla",
         originCountry: "Mexico",
         originLat: 20.45,
@@ -385,6 +432,7 @@ export const pins: FoodPin[] = [
       {
         id: "stale-bread-pudding",
         name: "Stale Bread",
+        image: breadPuddingImg,
         originCity: "Central Europe",
         originCountry: "Germany",
         originLat: 51.0,
@@ -410,6 +458,7 @@ export const pins: FoodPin[] = [
       {
         id: "veal-cutlet",
         name: "Veal Cutlet",
+        image: schnitzelImg,
         originCity: "Vienna",
         originCountry: "Austria",
         originLat: 48.21,
@@ -419,7 +468,7 @@ export const pins: FoodPin[] = [
       },
       {
         id: "breadcrumbs",
-        name: "Breadcrumbs",
+        name: "Breadcrumbs", // missing image
         originCity: "Milan",
         originCountry: "Italy",
         originLat: 45.46,
@@ -445,6 +494,7 @@ export const pins: FoodPin[] = [
       {
         id: "pancake-batter",
         name: "Pancake Batter",
+        image: batterImg,
         originCity: "Vienna",
         originCountry: "Austria",
         originLat: 48.21,
@@ -455,6 +505,7 @@ export const pins: FoodPin[] = [
       {
         id: "applesauce",
         name: "Apple Sauce",
+        image: appleSauceImg,
         originCity: "Central Asia",
         originCountry: "Kazakhstan",
         originLat: 43.2,
@@ -480,6 +531,7 @@ export const pins: FoodPin[] = [
       {
         id: "mortadella",
         name: "Mortadella",
+        image: mortadellaImg,
         originCity: "Bologna",
         originCountry: "Italy",
         originLat: 44.49,
@@ -490,6 +542,7 @@ export const pins: FoodPin[] = [
       {
         id: "fig-jam",
         name: "Fig Jam",
+        image: figImg,
         originCity: "Anatolia",
         originCountry: "Turkey",
         originLat: 38.0,
@@ -500,6 +553,7 @@ export const pins: FoodPin[] = [
       {
         id: "burrata",
         name: "Burrata",
+        image: burrataImg,
         originCity: "Andria",
         originCountry: "Italy",
         originLat: 41.23,
@@ -525,6 +579,7 @@ export const pins: FoodPin[] = [
       {
         id: "beef-abomasum",
         name: "Beef Stomach (Abomasum)",
+        image: lampredettoImg,
         originCity: "Florence",
         originCountry: "Italy",
         originLat: 43.77,
@@ -535,6 +590,7 @@ export const pins: FoodPin[] = [
       {
         id: "salsa-verde",
         name: "Green Sauce (Salsa Verde)",
+        image: salsaVerdeImg,
         originCity: "Tuscany",
         originCountry: "Italy",
         originLat: 43.5,
@@ -560,6 +616,7 @@ export const pins: FoodPin[] = [
       {
         id: "tortellini-pasta",
         name: "Tortellini Pasta",
+        image: tortelliniImg,
         originCity: "Bologna",
         originCountry: "Italy",
         originLat: 44.49,
@@ -570,6 +627,7 @@ export const pins: FoodPin[] = [
       {
         id: "parmesan",
         name: "Parmesan",
+        image: parmesanImg,
         originCity: "Parma",
         originCountry: "Italy",
         originLat: 44.8,
@@ -595,6 +653,7 @@ export const pins: FoodPin[] = [
       {
         id: "milk-custard",
         name: "Milk & Egg Custard Base",
+        image: torchedCustardImg,
         originCity: "Catalonia",
         originCountry: "Spain",
         originLat: 41.5,
@@ -605,6 +664,7 @@ export const pins: FoodPin[] = [
       {
         id: "cinnamon-crema",
         name: "Cinnamon",
+        image: cinnamonImg,
         originCity: "Kandy",
         originCountry: "Sri Lanka",
         originLat: 7.29,
@@ -630,6 +690,7 @@ export const pins: FoodPin[] = [
       {
         id: "potato-bravas",
         name: "Potato",
+        image: patatasImg,
         originCity: "Lake Titicaca",
         originCountry: "Peru",
         originLat: -15.9,
@@ -640,6 +701,7 @@ export const pins: FoodPin[] = [
       {
         id: "brava-sauce",
         name: "Spicy Tomato Sauce (Salsa Brava)",
+        image: spicySauceImg,
         originCity: "Madrid",
         originCountry: "Spain",
         originLat: 40.42,
@@ -650,6 +712,7 @@ export const pins: FoodPin[] = [
       {
         id: "aioli",
         name: "Aioli",
+        image: garlicAioliImg,
         originCity: "Catalonia",
         originCountry: "Spain",
         originLat: 41.5,
@@ -675,6 +738,7 @@ export const pins: FoodPin[] = [
       {
         id: "tomato-sabadell",
         name: "Tomato",
+        image: tomatoImg,
         originCity: "Cusco",
         originCountry: "Peru",
         originLat: -13.53,
@@ -685,6 +749,7 @@ export const pins: FoodPin[] = [
       {
         id: "olive-oil-sabadell",
         name: "Olive Oil",
+        image: oliveOilImg,
         originCity: "Athens",
         originCountry: "Greece",
         originLat: 37.97,
@@ -695,6 +760,7 @@ export const pins: FoodPin[] = [
       {
         id: "spanish-tortilla",
         name: "Spanish Tortilla (Egg & Potato)",
+        image: spanishTortillaImg,
         originCity: "Navarre",
         originCountry: "Spain",
         originLat: 42.7,
@@ -720,6 +786,7 @@ export const pins: FoodPin[] = [
       {
         id: "egg-custard-nata",
         name: "Egg Custard",
+        image: custardImg,
         originCity: "Belém, Lisbon",
         originCountry: "Portugal",
         originLat: 38.7,
@@ -730,6 +797,7 @@ export const pins: FoodPin[] = [
       {
         id: "puff-pastry",
         name: "Puff Pastry",
+        image: puffPastryImg,
         originCity: "Lisbon",
         originCountry: "Portugal",
         originLat: 38.72,
@@ -740,6 +808,7 @@ export const pins: FoodPin[] = [
       {
         id: "cinnamon-nata",
         name: "Cinnamon",
+        image: cinnamonImg,
         originCity: "Kandy",
         originCountry: "Sri Lanka",
         originLat: 7.29,

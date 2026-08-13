@@ -83,9 +83,25 @@ export default function Sidebar({ selectedPin, selectedIngredient, hoveredIngred
         </div>
       </div>
 
-      {/* Ingredient tabs — full width, flush to sidebar edges */}
+      {/* Ingredient tabs — always 3 slots, left-aligned; empty slots stay inert */}
       <div className="flex mt-4">
-        {selectedPin.ingredients.map((ing) => {
+        {Array.from({ length: 3 }, (_, slotIndex) => {
+          const ing = selectedPin.ingredients[slotIndex] ?? null;
+          if (!ing) {
+            return (
+              <div
+                key={`empty-slot-${slotIndex}`}
+                className="flex-1 flex flex-col items-center pointer-events-none"
+                aria-hidden
+              >
+                <div className="w-full flex flex-col items-center gap-1.5 py-3">
+                  <div className="w-14 h-14" />
+                  <span className="text-[10px] leading-tight px-1 invisible">placeholder</span>
+                </div>
+              </div>
+            );
+          }
+
           const isActive = selectedIngredient?.id === ing.id;
           const isHovered = hoveredIngredient?.id === ing.id;
           return (
