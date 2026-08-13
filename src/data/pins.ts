@@ -1,3 +1,5 @@
+import carrotCakeImg from "../assets/carrotcake.png";
+import schnitzelImg from "../assets/schnitzel.png";
 import porkSausageImg from "../assets/porksausage.png";
 import ketchupImg from "../assets/ketchup.png";
 import curryPowderImg from "../assets/currypowder.png";
@@ -15,7 +17,7 @@ import sauerkrautImg from "../assets/saurkraut.png";
 import rhubarbImg from "../assets/rhubarb.png";
 import custardImg from "../assets/custard.png";
 import breadPuddingImg from "../assets/breadpudding.png";
-import schnitzelImg from "../assets/schnitzel.png";
+import potatoCucumberImg from "../assets/potatocucumber.png"
 import batterImg from "../assets/batter.png";
 import appleSauceImg from "../assets/applesauce.png";
 import mortadellaImg from "../assets/mortadella.png";
@@ -33,6 +35,7 @@ import tomatoImg from "../assets/tomato.png";
 import oliveOilImg from "../assets/oliveoil.png";
 import spanishTortillaImg from "../assets/spanishtortilla.png";
 import puffPastryImg from "../assets/puffpastry.png";
+import strawberryImg from "../assets/strawberry.png";
 
 /**
  * IMAGE COVERAGE (last updated: Aug 2026)
@@ -172,34 +175,39 @@ export const pins: FoodPin[] = [
       "Weißwurst was accidentally invented on February 22, 1857 by butcher Josef Moser at the Gasthaus Zum Ewigen Licht in Munich. Running out of sheep intestine casings, he used pork casings, boiling them to prevent bursting.",
     ingredients: [
       {
-        id: "veal",
-        name: "Veal", // missing image
-        originCity: "Bavaria",
-        originCountry: "Germany",
-        originLat: 48.7,
-        originLng: 11.5,
-        history:
-          "Veal has been central to Bavarian cuisine since medieval times. Bavarian cattle farming traditions date to at least the 8th century, when monasteries maintained large herds. The tender meat of young calves became a prized ingredient in Alpine cooking.",
-      },
-      {
-        id: "parsley",
-        name: "Parsley", // missing image
-        originCity: "Sardinia",
-        originCountry: "Italy",
-        originLat: 39.2,
-        originLng: 9.1,
-        history:
-          "Parsley originated in the central Mediterranean and was cultivated by the ancient Greeks and Romans. It spread throughout Europe in the Middle Ages via monastic gardens and had reached German-speaking lands by the 12th century.",
-      },
-      {
-        id: "lemon",
-        name: "Lemon Zest", // missing image
-        originCity: "Assam",
+        id: "mustard",
+        name: "Mustard",
+        originCity: "Northern India",
         originCountry: "India",
-        originLat: 26.2,
-        originLng: 92.9,
+        originLat: 28.0,
+        originLng: 79.0,
+        routes: [
+          [
+            { name: "Northern India", lat: 28.0, lng: 79.0 },
+            { name: "Rome, Italy", lat: 41.9, lng: 12.5 },
+            { name: "Germany (regional mustard production)", lat: 51.0, lng: 10.0 },
+          ],
+        ],
         history:
-          "Lemons originated in Assam, northeastern India, and were introduced to Europe by Arab traders around 700 CE. They spread to Italy and from there northward, becoming a luxury flavoring in German cooking by the Renaissance period.",
+          "The history of mustard spans roughly 5,000 years, with early cultivation and medicinal use documented in ancient India, Sumer, and Egypt. It was the Romans, around the 4th century BCE, who turned it into a condiment by grinding the seeds and mixing them with unfermented grape juice (mustum) — the origin of the word 'mustard.' Roman trade routes carried mustard seed across Europe, and by the 10th century it had taken root as a locally grown, everyday German condiment.",
+      },
+      {
+        id: "bavarian-pretzel",
+        name: "Pretzel",
+        image: pretzelImg,
+        originCity: "Southern France / Northern Italy",
+        originCountry: "Italy",
+        originLat: 44.0,
+        originLng: 7.5,
+        routes: [
+          [
+            { name: "Southern France / Northern Italy (monastery origin)", lat: 44.0, lng: 7.5 },
+            { name: "Bad Urach, Germany (earliest German record)", lat: 48.49, lng: 9.39 },
+            { name: "Munich, Bavaria, Germany (Laugenbrezel innovation)", lat: 48.137, lng: 11.576 },
+          ],
+        ],
+        history:
+          "The history of the pretzel dates back to the 6th-7th century, when monks in southern France or northern Italy twisted leftover bread dough into a shape resembling crossed arms in prayer, calling it pretiola ('little reward') and giving it to children who learned their prayers. The earliest recorded German mention comes from Bad Urach in the 12th century, and the pretzel became deeply embedded in Bavarian and Swabian baking culture by the 15th century. Its modern glossy, deep-brown character arrived by accident in early 19th-century Munich, when a baker mistakenly glazed dough with a lye solution instead of sugar water before baking — creating the Laugenbrezel now standard across southern Germany.",
       },
     ],
   },
@@ -226,17 +234,6 @@ export const pins: FoodPin[] = [
         originLng: 29.06,
         history:
           "Vertical spit-roasting of meat developed in the Ottoman Empire in the 19th century, later evolving into the modern döner and eventually the Berlin sandwich format.",
-      },
-      {
-        id: "flatbread-pide",
-        name: "Flatbread",
-        image: flatbreadImg,
-        originCity: "Anatolia",
-        originCountry: "Turkey",
-        originLat: 39.0,
-        originLng: 35.0,
-        history:
-          "Unleavened and semi-leavened flatbreads have been a staple of Anatolian cuisine for millennia, forming the base for the modern döner sandwich.",
       },
       {
         id: "garlic-yogurt-sauce",
@@ -323,17 +320,6 @@ export const pins: FoodPin[] = [
         history:
           "Quark, a fresh curdled dairy product, has been a staple of Central European cooking since at least the Middle Ages.",
       },
-      {
-        id: "shortcrust-pastry",
-        name: "Shortcrust Pastry",
-        image: puffPastryImg,
-        originCity: "Central Europe",
-        originCountry: "Germany",
-        originLat: 50.0,
-        originLng: 10.0,
-        history:
-          "Butter-based shortcrust doughs became common in German baking by the early modern period, used as a base for many fruit and cheese tarts.",
-      },
     ],
   },
   {
@@ -360,6 +346,24 @@ export const pins: FoodPin[] = [
         history:
           "Modern cream cheese was standardized in the U.S. in the late 19th century and later adopted into European bakeries as a frosting base for cakes like this one.",
       },
+      {
+        id: "carrot-cake",
+        name: "Carrot Cake",
+        image: carrotCakeImg,
+        originCity: "Kaiseraugst, Aargau",
+        originCountry: "Switzerland",
+        originLat: 47.53,
+        originLng: 7.73,
+        routes: [
+          [
+            { name: "Aargau, Switzerland", lat: 47.39, lng: 8.04 },
+            { name: "Germany (regional Möhrenkuchen)", lat: 51.0, lng: 10.0 },
+            { name: "United States (cream cheese frosting)", lat: 40.71, lng: -74.0 },
+          ],
+        ],
+        history:
+          "Simple carrot-sweetened cakes appear in European cookbooks as early as the 16th century, when carrots served as a cheap stand-in for scarce, expensive sugar. The direct ancestor of today's carrot cake is the Aargauer Rüeblitorte, first recorded in the 1890s in Switzerland's carrot-growing Aargau canton. German bakers developed their own Möhrenkuchen variations through the 20th century, often spiced with cinnamon and walnuts.",
+      }
     ],
   },
   {
@@ -385,17 +389,6 @@ export const pins: FoodPin[] = [
         originLng: 11.5,
         history:
           "Pork roasting traditions are central to Bavarian cuisine, with crackling-skin roasts documented in regional cookbooks since at least the 19th century.",
-      },
-      {
-        id: "bread-roll-semmel",
-        name: "Bread Roll (Semmel)",
-        image: pretzelImg,
-        originCity: "Vienna",
-        originCountry: "Austria",
-        originLat: 48.21,
-        originLng: 16.37,
-        history:
-          "The Semmel roll has roots in Viennese baking traditions that spread throughout the Austro-Bavarian region by the 18th century.",
       },
       {
         id: "sauerkraut",
@@ -472,25 +465,41 @@ export const pins: FoodPin[] = [
       "Schweineschnitzel (breaded, pan-fried pork cutlet) is closely associated with Wiener Schnitzel from Vienna, which must be made with veal. Origins may trace back to breaded cutlet dishes from Northern Italy (cotoletta alla milanese); it became a broader Central European staple by the 19th century.",
     ingredients: [
       {
-        id: "veal-cutlet",
-        name: "Veal Cutlet",
+        id: "potato-cucumber-salad",
+        name: "Potato Cucumber Salad",
+        image: potatoCucumberImg,
+        originCity: "Cusco",
+        originCountry: "Peru",
+        originLat: -13.53,
+        originLng: -71.97,
+        routes: [
+          [
+            { name: "Andes, Peru", lat: -13.53, lng: -71.97 },
+            { name: "Seville, Spain", lat: 37.39, lng: -5.99 },
+            { name: "Bavaria, Germany", lat: 48.7, lng: 11.5 },
+          ],
+        ],
+        history:
+          "The potato was domesticated in the Andes of Peru and Bolivia over 7,000 years ago and brought to Europe by Spanish colonizers in the 16th century. Widely feared and avoided at first, it was pushed into German diets in the 18th century — famously championed by Prussia's Frederick the Great — and regional Kartoffelsalat traditions emerged by the 1800s. The Bavarian style, dressed warm in vinegar, mustard, and broth rather than mayonnaise, traditionally folds in thin-sliced cucumber as a cool, fresh counterpoint to the starchy potato.",
+      },
+      {
+        id: "schnitzel",
+        name: "Schnitzel",
         image: schnitzelImg,
         originCity: "Vienna",
         originCountry: "Austria",
         originLat: 48.21,
         originLng: 16.37,
+        routes: [
+          [
+            { name: "Constantinople (breaded, fried cutlets among 12th-century Jewish communities)", lat: 41.0, lng: 28.98 },
+            { name: "Venice, Italy (gilded/breaded meat spreads north, 16th century)", lat: 45.44, lng: 12.33 },
+            { name: "Vienna, Austria (Wiener Schnitzel codified)", lat: 48.21, lng: 16.37 },
+            { name: "Tegernsee, Germany", lat: 47.7078, lng: 11.7562 },
+          ],
+        ],
         history:
-          "Thin-pounded veal cutlets became standardized as Wiener Schnitzel in Vienna by the 19th century, spreading throughout Bavaria and the wider Alpine region.",
-      },
-      {
-        id: "breadcrumbs",
-        name: "Breadcrumbs", // missing image
-        originCity: "Milan",
-        originCountry: "Italy",
-        originLat: 45.46,
-        originLng: 9.19,
-        history:
-          "Breading and pan-frying cutlets is often traced to Milanese cotoletta, with a popular (if disputed) legend that the technique traveled north into Austria and Bavaria.",
+          "The breaded, pan-fried cutlet's most famous myth is that Field Marshal Radetzky brought the recipe home from Milan's cotoletta alla milanese in 1848 after a note in his military dispatches supposedly praised it (though eventually debunked). Breaded, fried cutlets are documented among Jewish communities in 12th-century Constantinople, and the practice of coating meat in a golden crust (originally with actual gold leaf, for wealth display and dubious health reasons) spread to Venice by the Renaissance and radiated across northern Italy and the Alps from there. By the 19th century Vienna had claimed and legally codified its own version — thin veal, egg, breadcrumbs, fried in lard or clarified butter — as a distinct national dish, which then spread into Bavaria and the broader Alpine region as a shared culinary staple.",
       },
     ],
   },
@@ -529,6 +538,24 @@ export const pins: FoodPin[] = [
         history:
           "Apples originated in the wild forests of Central Asia and were cultivated across Europe for centuries, becoming a common accompaniment to German and Austrian sweet dishes.",
       },
+      {
+        id: "german-strawberries",
+        name: "German Regional Strawberries",
+        image: strawberryImg,
+        originCity: "Plougastel-Daoulas",
+        originCountry: "France",
+        originLat: 48.38,
+        originLng: -4.36,
+        routes: [
+          [
+            { name: "Concepción, Chile (Fragaria chiloensis)", lat: -36.83, lng: -73.05 },
+            { name: "Plougastel-Daoulas, Brittany, France", lat: 48.38, lng: -4.36 },
+            { name: "Germany (regional growing regions)", lat: 51.0, lng: 10.0 },
+          ],
+        ],
+        history:
+          "The history of the modern garden strawberry dates back to 1712, when French engineer Amédée-François Frézier brought large-fruited Chilean strawberries back to Brittany, where they cross-hybridized with wild Virginia strawberries already growing in French gardens, producing the ancestor of virtually all strawberries eaten today. The hybrid spread across Europe through the 1800s, and Germany's cooler growing regions (such as the Bodensee and Beelitz areas) became prized strawberry country by the 20th century.",
+      }
     ],
   },
   {
@@ -540,7 +567,7 @@ export const pins: FoodPin[] = [
     lng: 11.3423,
     videoId: "kCyf1pUY0ec",
     review:
-      "Purchased at Pan 8, through a friend's recommendation. I've since realized that I am not a big fan of Italian sandwich bread or grilled, thick cut mortadella but the fig jam and crispy onions and burrata were good. I will always prefer a wet, saucy cheesy sandwich.",
+      "Purchased at Pan 8, through a friend's recommendation. I've since realized that I am not a big fan of Italian sandwich bread, and neither am I of grilled, thick cut mortadella, but the fig jam and crispy onions and burrata were good. I will always prefer a wet, saucy cheesy sandwich.",
     history:
       "Mortadella is a Bologna specialty with origins tracing to Roman-era cured pork preparations, refined into its modern form by Bolognese butchers by the Renaissance.",
     ingredients: [
@@ -664,12 +691,12 @@ export const pins: FoodPin[] = [
     review:
       "Stumbled on Sucre Cremat in a Barcelona alleyway. A sweet pudding not so dissimilar from crème brûlée, however much silkier, with more complex flavor profiles such as lemon, orange, and cinnamon. Feels a bit less sweet as well. I prefer a thick crème brûlée but this was certainly an enjoyable experience.",
     history:
-      "Crema catalana is considered one of Europe's oldest custard desserts, with recipes documented in Catalonia since at least the medieval period — likely predating French crème brûlée, which some food historians believe was influenced by it.",
+      "Crema catalana is considered one of Europe's oldest custard desserts, dating back to at least 1324, when a spiced almond-milk custard appears in the Llibre de Sent Soví (one of Europe's oldest surviving cookbooks). This makes it older than France's crème brûlée, which isn't recorded until 1691. The recipe was refined over centuries into the modern crema catalana: milk thickened with egg yolk and cornstarch (not cream, unlike its French cousin), infused with lemon, orange, and cinnamon, and finished stovetop rather than baked. It became traditionally tied to Saint Joseph's Day.",
     ingredients: [
       {
         id: "milk-custard",
         name: "Milk & Egg Custard Base",
-        image: torchedCustardImg,
+        image: custardImg,
         originCity: "Catalonia",
         originCountry: "Spain",
         originLat: 41.5,
@@ -687,6 +714,23 @@ export const pins: FoodPin[] = [
         originLng: 80.63,
         history:
           "Cinnamon reached medieval Iberia via Arab and Mediterranean spice trade routes.",
+      },
+      {
+        id: "torched-crackle-top-custard",
+        name: "Crackle-Top",
+        image: torchedCustardImg,
+        originCity: "Catalonia",
+        originCountry: "Spain",
+        originLat: 41.5,
+        originLng: 1.5,
+        routes: [
+          [
+            { name: "Catalan convent kitchens (18th century)", lat: 41.5, lng: 1.5 },
+            { name: "Barcelona, Spain", lat: 41.3874, lng: 2.1686 },
+          ],
+        ],
+        history:
+          "The caramelized crust was first formally documented around 1770. Popular legend places its invention in a Catalan convent: nuns preparing a custard for a visiting bishop found it had turned out too runny, so as a last-minute fix they scattered sugar over the top and scorched it into a hardened shell with a hot iron. The bishop reportedly exclaimed 'Crema!' ('it's burnt!' in Catalan) upon tasting it. The hot-iron branding method remains the traditional way it's finished in Barcelona kitchens today.",
       },
     ],
   },
