@@ -16,6 +16,7 @@
     "@deck.gl/layers": "^9.3.6",
     "@deck.gl/react": "^9.3.6",
     "@googlemaps/js-api-loader": "^2.1.1",
+    "@rachichi/design": "^0.1.0",
     "@types/google.maps": "^3.65.2",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
