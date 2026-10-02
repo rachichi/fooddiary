@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Navbar from "./components/Navbar";
+import { SiteFooter, SiteHeader } from "@rachichi/design";
 import FoodMap2D from "./components/FoodMap2D";
 import FoodMap3D from "./components/FoodMap3D";
 import Sidebar from "./components/Sidebar";
@@ -38,7 +38,7 @@ export default function App() {
 
   return (
     <div className="flex flex-col h-full text-warm-black" style={{ fontFamily: "Helvetica Neue, Helvetica, Arial, sans-serif" }}>
-      <Navbar />
+      <SiteHeader title="FOOD DIARY" newTab />
       <div className="hidden max-sm:portrait:block px-4 py-2 border-b border-warm-black/20 text-[10px] tracking-widest font-bold uppercase text-center bg-warm-black text-white">
         We've detected you may be on mobile — rotate your phone to landscape for a better experience.
       </div>
@@ -75,6 +75,7 @@ export default function App() {
           />
         </div>
       </div>
+      <SiteFooter stack="react, typescript, deck.gl, google maps" />
     </div>
   );
 }
